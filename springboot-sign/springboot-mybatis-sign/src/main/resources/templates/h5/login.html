@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+<title>上课签到管理系统</title>
+<link rel="stylesheet" href="fonts/iconfont.css" />
+<link rel="stylesheet" href="css/font.css" />
+<link rel="stylesheet" href="css/mui.css" />
+<link rel="stylesheet" href="css/weui.min.css" />
+<link rel="stylesheet" href="css/jquery-weui.min.css" />
+<link rel="stylesheet" href="css/animate.css" />
+<link rel="stylesheet" href="css/pages/login.css" />
+<script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="lib/jsUtils.js"></script>
+<script>
+        function login(o1,o2){
+        	$.ajax({  
+                url: getIpUrl() + o1,  
+                data:{'account':$("input[name='username']").val(),
+                	  'password':$("input[name='password']").val()
+                },
+                dataType:'JSON',  
+                type:'post',  
+                success:function(data){
+                	if(data.success == true){
+                		window.location.href= getIpUrl() + o2;
+                	}else{
+						alert(data.message);                		
+                	}
+                }  
+            }).done().fail().always();  
+        }
+        
+        function select_teacher(obj){
+        	$("#select_teacher").addClass("current");
+        	$("#select_student").removeClass("current");
+        }
+        
+		function select_student(obj){
+			$("#select_teacher").removeClass("current");
+        	$("#select_student").addClass("current");
+        }
+
+        </script>
+</head>
+<body>
+	<div class="header">
+		<img src="images/login_logo_w.png" />
+		<h2>签到考勤管理</h2>
+	</div>
+	<div class="login-wrap">
+		<div class="login-box">
+			<form>
+				<div class="input-wrap">
+					<input type="text" name="username" placeholder="账号/邮箱" />
+				</div>
+				<div class="input-wrap">
+					<input type="password" name="password" placeholder="密码" />
+				</div>
+				<!-- <div class="input-wrap">
+					<input type="text" name="yanzm" placeholder="验证码" /> <img src="" class="validate-code" />
+				</div> -->
+			</form>
+		</div>
+		<div class="btns">
+			<a id="select_teacher" href="javascript:void(0);" onclick="select_teacher()" class="current">教师登陆</a> 
+			<a id="select_student" href="javascript:void(0);" onclick="select_student()" >学生登陆</a>
+		</div> 
+
+		<a href="javascript:login('/loginPost','/app');" class="weui_btn login-btn weui_btn_primary">登录</a>
+	</div>
+	<div class="footer">Copyright&nbsp;&copy;&nbsp;扬州大学&nbsp;版权所有</div>
+</body>
+</html>
