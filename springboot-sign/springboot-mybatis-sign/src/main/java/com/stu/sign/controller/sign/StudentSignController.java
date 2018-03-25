@@ -22,25 +22,21 @@ import com.stu.sign.service.StudentSignService;
 public class StudentSignController {
 	@Autowired
 	private ClassCourseService classCourseService;
-	
+
 	@Autowired
 	private StudentSignService studentSignService;
 
-//	@RequestMapping(value = "/getStudentCourse", method = RequestMethod.GET)
-//	public List<StudentCourse> selectStuCourse(String studentNum, String weekNum) {
-//		return classCourseService.findStudentCourseList(studentNum, weekNum);
-//	}
-	
 	@PostMapping("/studentSign")
 	public @ResponseBody Map<String, Object> studentSign(String studentNum, String weekNum, HttpSession session) {
 		List<StudentCourse> studentCourseList = classCourseService.findStudentCourseList(studentNum, weekNum);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(ListUtils.isEmpty(studentCourseList)){
+		if (ListUtils.isEmpty(studentCourseList)) {
 			map.put("message", "当前无课程考勤");
-		}else{
+		} else {
+			String accountId = (String) session.getAttribute("ACCOUNT_ID");
 			StudentSign studentSign = new StudentSign();
 			studentSign.setStudentclassNum(studentCourseList.get(0).getClassNum());
-			studentSign.setStudentNum(Integer.valueOf(studentNum));
+			studentSign.setStudentNum(Integer.valueOf(accountId));
 			studentSign.setWeekNum(weekNum);
 			studentSign.setSection(studentCourseList.get(0).getSection());
 			studentSign.setSignTime(new Timestamp(System.currentTimeMillis()));
@@ -50,14 +46,14 @@ public class StudentSignController {
 		}
 		return map;
 	}
-	
+
 	@PostMapping("/findAbsentStudents")
 	public @ResponseBody Map<String, Object> findAbsentStudents(String studentNum, String weekNum, HttpSession session) {
 		List<StudentCourse> studentCourseList = classCourseService.findStudentCourseList(studentNum, weekNum);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(ListUtils.isEmpty(studentCourseList)){
+		if (ListUtils.isEmpty(studentCourseList)) {
 			map.put("message", "当前无课程考勤");
-		}else{
+		} else {
 			StudentSign studentSign = new StudentSign();
 			studentSign.setStudentclassNum(studentCourseList.get(0).getClassNum());
 			studentSign.setStudentNum(Integer.valueOf(studentNum));

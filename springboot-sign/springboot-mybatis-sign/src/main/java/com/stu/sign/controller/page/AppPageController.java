@@ -13,4 +13,9 @@ public class AppPageController {
 		String pagename = request.getParameter("pagename");
 		return "h5/" + pagename.replace(".html", "");
 	}
+	
+	@RequestMapping("/app")
+	public String redirectAppPage() {
+		return "h5/app";
+	}
 }

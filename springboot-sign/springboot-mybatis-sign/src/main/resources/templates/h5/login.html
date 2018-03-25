@@ -14,11 +14,14 @@
 <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="lib/jsUtils.js"></script>
 <script>
+        window.loginType = "1";
         function login(o1,o2){
+        	var loginType = 
         	$.ajax({  
                 url: getIpUrl() + o1,  
-                data:{'account':$("input[name='username']").val(),
-                	  'password':$("input[name='password']").val()
+                data:{'account' : $("input[name='username']").val(),
+                	  'password' : $("input[name='password']").val(),
+                	  'loginType' : window.loginType
                 },
                 dataType:'JSON',  
                 type:'post',  
@@ -33,11 +36,13 @@
         }
         
         function select_teacher(obj){
+        	window.loginType = "1";
         	$("#select_teacher").addClass("current");
         	$("#select_student").removeClass("current");
         }
         
 		function select_student(obj){
+			window.loginType = "2";
 			$("#select_teacher").removeClass("current");
         	$("#select_student").addClass("current");
         }
