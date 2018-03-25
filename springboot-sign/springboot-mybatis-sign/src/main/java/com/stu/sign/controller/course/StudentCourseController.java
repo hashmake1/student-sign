@@ -13,7 +13,7 @@ import com.stu.sign.service.ClassCourseService;
 @RestController
 public class StudentCourseController {
 	@Autowired
-	private ClassCourseService classCourseService;
+	private ClassCourseService classCourseService; 
 
 	@RequestMapping(value = "/getStudentCourse", method = RequestMethod.GET)
 	public List<StudentCourse> selectStuCourse(String studentNum, String weekNum) {
