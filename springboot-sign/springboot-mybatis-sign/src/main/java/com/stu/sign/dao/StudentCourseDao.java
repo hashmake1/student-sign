@@ -10,17 +10,19 @@ import org.apache.ibatis.annotations.Select;
 
 import com.stu.sign.domain.StudentCourse;
 
-@Mapper // 标志为 Mybatis 的 Mapper
+@Mapper
 public interface StudentCourseDao {
 
     /**
-     * 根据学生编号和周期查询该上的课程
+     * 根据学生编号和时间查询该上的课程,上课前15分钟才能签到
      * @param StudentNum 学生编号
      * @param WeekNum 星期
      */
-    @Select("select * from class_course a where a.weekNum = #{weekNum} and exists(select 1 from student_info b where a.classname = b.classname and b.studentNum = #{studentNum})")
+    @Select("select * from class_course a where exists(select 1 from student_info b "
+    		+ "where a.classNum = b.classNum and b.studentNum = #{studentNum}) and a.CourseEndTime > CURRENT_TIMESTAMP"
+//    		+ " and a.CourseStartTime > CURRENT_TIMESTAMP - INTERVAL 15 MINUTE"
+    		)
     @Results({
-            @Result(property = "id", column = "id"),
             @Result(property = "studentNum", column = "StudentNum"),
             @Result(property = "weekNum", column = "WeekNum")
     })

@@ -1,4 +1,4 @@
-package com.stu.sign.controller;
+package com.stu.sign.controller.course;
 
 import java.util.List;
 

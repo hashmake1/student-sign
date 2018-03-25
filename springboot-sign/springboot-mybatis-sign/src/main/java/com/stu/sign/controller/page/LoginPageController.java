@@ -1,4 +1,4 @@
-package com.stu.sign.controller;
+package com.stu.sign.controller.page;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class LoginController {
+public class LoginPageController {
+
+	@RequestMapping("/")
+	public String sayHello() {
+		return "h5/login";
+	}
 
 	@RequestMapping("/login")
 	public String login(Model model) {

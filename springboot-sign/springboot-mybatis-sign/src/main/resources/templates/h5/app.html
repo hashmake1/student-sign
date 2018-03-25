@@ -14,7 +14,42 @@
 <script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="lib/jsUtils.js"></script>
 <script>
+function student_sign(){
+	$.ajax({  
+        url: getIpUrl() + '/studentSign',  
+        data:{'studentNum':'141406101',
+        	  'weekNum':'周一'
+        },
+        dataType:'JSON',  
+        type:'post',  
+        success:function(data){
+        	alert(data.message);
+        }  
+    }).done().fail().always();  
+}
 
+function doDownload(){
+	console.log("ajaxDownloadSynchronized");
+    var url = getIpUrl() + '/downloadFileAction';
+    var fileName = "testAjaxDownload.txt";
+    var form = $("<form></form>").attr("action", url).attr("method", "post");
+    form.append($("<input></input>").attr("type", "hidden").attr("name", "fileName").attr("value", fileName));
+    form.appendTo('body').submit().remove();
+	$.ajax({  
+        url: getIpUrl() + '/downloadFileAction',  
+        data:{},
+        dataType:'JSON',  
+        type:'post',  
+        success:function(response, status, request){
+        	alert(1);
+        }  
+    }).done().fail().always();  
+}
+
+function doDownload() {  
+    var upl = document.getElementById("download");  
+    upl.submit();  
+} 
 
 </script>
 </head>
@@ -26,24 +61,29 @@
 	</header>
 	<article style="padding-bottom: 54px; padding-top: 44px;">
 		<div class="list-wrap">
-			<h4>本节课签到情况</h4>
+			<h4>本节课情况</h4>
 			<ul class="app-list">
 				<li>
 					<div class="app-wrap">
-						<a href="javascript:goto('xunjia.html');"> <i class="iconfont">&#xe625;</i> <span>签到管理</span>
+						<a href="javascript:goto('xunjia.html');"> <i class="iconfont">&#xe625;</i> <span>缺课人员</span>
 						</a>
 					</div>
-				</li>
-				<li>
-					<div class="app-wrap">
-						<a href="javascript:;"> <i class="iconfont">&#xe624;</i> <span>缺课人员</span>
-						</a>
-					</div>
-
 				</li>
 				<li>
 					<div class="app-wrap">
 						<a href="javascript:;"> <i class="iconfont">&#xe645;</i> <span>请假人员</span>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="app-wrap">
+						<a href="javascript:goto('upload.html');"> <i class="iconfont">&#xe620;</i> <span>上传本课作业</span>
+						</a>
+					</div>
+				</li>
+				<li>
+					<div class="app-wrap">
+						<a href="javascript:doDownload();"> <i class="iconfont">&#xe648;</i> <span>下载本课作业</span>
 						</a>
 					</div>
 				</li>
@@ -55,29 +95,28 @@
 			<ul class="app-list">
 				<li>
 					<div class="app-wrap">
-						<a href="javascript:goto('order.html');"> <i class="iconfont">&#xe64b;</i> <span>考勤管理</span>
+						<a href="javascript:goto('absence.html');"> <i class="iconfont">&#xe64b;</i> <span>申请请假</span>
 						</a>
 					</div>
 				</li>
 				<li>
 					<div class="app-wrap">
-						<a href="javascript:;"> <i class="iconfont">&#xe644;</i> <span>签到记录</span>
+						<a href="javascript:void(0);" onclick="student_sign()"> <i class="iconfont">&#xe644;</i> <span>考勤签到</span>
 						</a>
 					</div>
 				</li>
 				<li>
 					<div class="app-wrap">
-						<a href="javascript:;"> <i class="iconfont">&#xe649;</i> <span>收货看板</span>
+						<a href="javascript:void(0);"> <i class="iconfont">&#xe649;</i> <span>签到记录</span>
 						</a>
 					</div>
 				</li>
-				<li>
+				<!-- <li>
 					<div class="app-wrap">
 						<a href="javascript:;"> <i class="iconfont">&#xe647;</i> <span>收货记录</span>
 						</a>
 					</div>
-
-				</li>
+				</li> -->
 			</ul>
 		</div>
 

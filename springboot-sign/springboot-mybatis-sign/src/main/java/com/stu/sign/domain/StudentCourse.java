@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class StudentCourse {
 	private int id;
 	private String section;
-	private String className;
+	private String classNum;
 	private String weekNum;
 	private Timestamp courseEndTime;
 	private Timestamp courseStartTime;
@@ -26,12 +26,12 @@ public class StudentCourse {
 		this.section = section;
 	}
 
-	public String getClassName() {
-		return className;
+	public String getClassNum() {
+		return classNum;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
+	public void setClassNum(String classNum) {
+		this.classNum = classNum;
 	}
 
 	public String getWeekNum() {
