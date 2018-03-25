@@ -3,3 +3,4 @@
 *.classpath
 springboot-sign/springboot-mybatis-sign/target/
 .metadata/
+.recommenders/

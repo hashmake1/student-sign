@@ -35,21 +35,10 @@ function doDownload(){
     var form = $("<form></form>").attr("action", url).attr("method", "post");
     form.append($("<input></input>").attr("type", "hidden").attr("name", "fileName").attr("value", fileName));
     form.appendTo('body').submit().remove();
-	$.ajax({  
-        url: getIpUrl() + '/downloadFileAction',  
-        data:{},
-        dataType:'JSON',  
-        type:'post',  
-        success:function(response, status, request){
-        	alert(1);
-        }  
-    }).done().fail().always();  
+	
 }
 
-function doDownload() {  
-    var upl = document.getElementById("download");  
-    upl.submit();  
-} 
+
 
 </script>
 </head>
