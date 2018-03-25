@@ -50,4 +50,24 @@ public class StudentSignController {
 		}
 		return map;
 	}
+	
+	@PostMapping("/findAbsentStudents")
+	public @ResponseBody Map<String, Object> findAbsentStudents(String studentNum, String weekNum, HttpSession session) {
+		List<StudentCourse> studentCourseList = classCourseService.findStudentCourseList(studentNum, weekNum);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(ListUtils.isEmpty(studentCourseList)){
+			map.put("message", "当前无课程考勤");
+		}else{
+			StudentSign studentSign = new StudentSign();
+			studentSign.setStudentclassNum(studentCourseList.get(0).getClassNum());
+			studentSign.setStudentNum(Integer.valueOf(studentNum));
+			studentSign.setWeekNum(weekNum);
+			studentSign.setSection(studentCourseList.get(0).getSection());
+			studentSign.setSignTime(new Timestamp(System.currentTimeMillis()));
+			studentSign.setSignFlag(1);
+			studentSignService.insertStudentSign(studentSign);
+			map.put("message", "考勤成功");
+		}
+		return map;
+	}
 }

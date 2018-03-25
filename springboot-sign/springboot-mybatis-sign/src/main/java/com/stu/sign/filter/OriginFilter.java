@@ -23,6 +23,7 @@ public class OriginFilter implements Filter {
 
 	}
 
+	/** 取消跨域访问限制 */
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse response = (HttpServletResponse) res;
