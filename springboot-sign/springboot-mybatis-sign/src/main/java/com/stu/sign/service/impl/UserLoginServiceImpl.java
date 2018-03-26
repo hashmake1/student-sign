@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.stu.sign.dao.UserLoginDao;
+import com.stu.sign.dao.TeacherInfoDao;
 import com.stu.sign.domain.TeacherInfo;
 import com.stu.sign.service.UserLoginService;
 
@@ -13,16 +13,11 @@ import com.stu.sign.service.UserLoginService;
 public class UserLoginServiceImpl implements UserLoginService {
 
 	@Autowired
-	private UserLoginDao userLoginDao;
-
-	// @Override
-	// public List<TeacherInfo> findListByUserId() {
-	// return userLoginDao.findListByUserId();
-	// }
+	private TeacherInfoDao teacherInfoDao;
 
 	@Override
 	public boolean checkAccountAndPwd(String account, String password) {
-		List<TeacherInfo> teacherInfoList = userLoginDao.findListByNumPwd(account, password);
+		List<TeacherInfo> teacherInfoList = teacherInfoDao.findListByNumPwd(account, password);
 		if (teacherInfoList != null && teacherInfoList.size() > 0) {
 			return true;
 		}

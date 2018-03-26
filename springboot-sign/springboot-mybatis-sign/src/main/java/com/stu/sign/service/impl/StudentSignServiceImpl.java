@@ -1,5 +1,7 @@
 package com.stu.sign.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +21,10 @@ public class StudentSignServiceImpl implements StudentSignService {
 	@Override
 	public int insertStudentSign(StudentSign studentSign){
 		return studentSignDao.insertStudentSign(studentSign);
+	}
+
+	@Override
+	public List<StudentSign> findStudentSignList(int classCourseId) {
+		return studentSignDao.findListByName(classCourseId);
 	}
 }

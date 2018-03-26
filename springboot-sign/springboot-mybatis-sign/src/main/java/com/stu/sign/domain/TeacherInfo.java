@@ -4,58 +4,58 @@ import java.sql.Timestamp;
 
 public class TeacherInfo {
 
-	private int TeacherId;
-	private int TeacherNum;
-	private String TeacherName;
-	private String LoginPasseord;
-	private Timestamp CreateDate;
-	private String Remarks;
+	private int teacherId;
+	private int teacherNum;
+	private String teacherName;
+	private String loginPassword;
+	private Timestamp createDate;
+	private String remarks;
 
 	public int getTeacherId() {
-		return TeacherId;
+		return teacherId;
 	}
 
 	public void setTeacherId(int teacherId) {
-		TeacherId = teacherId;
+		this.teacherId = teacherId;
 	}
 
 	public int getTeacherNum() {
-		return TeacherNum;
+		return teacherNum;
 	}
 
 	public void setTeacherNum(int teacherNum) {
-		TeacherNum = teacherNum;
+		this.teacherNum = teacherNum;
 	}
 
 	public String getTeacherName() {
-		return TeacherName;
+		return teacherName;
 	}
 
 	public void setTeacherName(String teacherName) {
-		TeacherName = teacherName;
+		this.teacherName = teacherName;
 	}
 
-	public String getLoginPasseord() {
-		return LoginPasseord;
+	public String getLoginPassword() {
+		return loginPassword;
 	}
 
-	public void setLoginPasseord(String loginPasseord) {
-		LoginPasseord = loginPasseord;
+	public void setLoginPassword(String loginPassword) {
+		this.loginPassword = loginPassword;
 	}
 
 	public Timestamp getCreateDate() {
-		return CreateDate;
+		return createDate;
 	}
 
 	public void setCreateDate(Timestamp createDate) {
-		CreateDate = createDate;
+		this.createDate = createDate;
 	}
 
 	public String getRemarks() {
-		return Remarks;
+		return remarks;
 	}
 
 	public void setRemarks(String remarks) {
-		Remarks = remarks;
+		this.remarks = remarks;
 	}
 }
