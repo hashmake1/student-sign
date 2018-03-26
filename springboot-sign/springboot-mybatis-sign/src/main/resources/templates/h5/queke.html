@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+<title>寻价单</title>
+<link rel="stylesheet" href="fonts/iconfont.css" />
+<link rel="stylesheet" href="css/font.css" />
+<link rel="stylesheet" href="css/weui.min.css" />
+<link rel="stylesheet" href="css/jquery-weui.min.css" />
+<link rel="stylesheet" href="css/mui.css" />
+<link rel="stylesheet" href="css/animate.css" />
+<link rel="stylesheet" href="css/pages/xunjia.css" />
+<script type="text/javascript" src="lib/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="lib/jsUtils.js"></script>
+<script type="text/javascript" src="js/jquery-weui.js"></script>
+</head>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var loginType = $.ajax({
+			url : getIpUrl() + "/findAbsentStudents",
+			data : {},
+			dataType : 'JSON',
+			type : 'post',
+			success : function(data) {
+				if (data.success == true) {
+					data.message.forEach(function(student) {
+						var div = $("#absentDiv").hide();
+						var div = $("#absentDiv").clone(true).attr('ID', "studentId_" + student.studentId);
+						div.appendTo("article");
+						$("#" + "studentId_" + student.studentId).clone(true).appendTo("article");
+						$("#" + "studentId_" + student.studentId).find("#studentNum").text(student.studentNum);
+						$("#" + "studentId_" + student.studentId).find("#studentName").text(student.studentName);
+						$("#" + "studentId_" + student.studentId).show();
+					})
+				} else {
+					alert(data.message);
+				}
+			}
+		}).done().fail().always();
+	});
+</script>
+<body>
+	<header>
+		<div class="titlebar reverse">
+			<a href="javascript:goto('app.html')"> <i class="iconfont">&#xe640;</i>
+			</a>
+			<h1>未签到人员</h1>
+			<a href="javascript:;" class="app"> <i class="iconfont">&#xe643;</i>
+			</a>
+		</div>
+	</header>
+	<article style="bottom: 54px;">
+		<div id="absentDiv" class="weui_cells weui_cells_access animated fadeInRight">
+			<a class="weui_cell" href="javascript:;">
+				<div class="weui_cell_bd weui_cell_primary">
+					<p>
+						<span id="studentNum" class="phone">学号</span>
+						<span class="phone">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span id="studentName" class="phone">姓名</span>
+						<span href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary">未签到</span>
+					</p>
+				</div>
+			</a>
+		</div>
+	</article>
+</body>
+</html>

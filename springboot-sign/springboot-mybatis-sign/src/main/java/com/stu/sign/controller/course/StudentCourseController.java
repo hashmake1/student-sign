@@ -16,8 +16,8 @@ public class StudentCourseController {
 	private ClassCourseService classCourseService; 
 
 	@RequestMapping(value = "/getStudentCourse", method = RequestMethod.GET)
-	public List<StudentCourse> selectStuCourse(String studentNum, String weekNum) {
-		return classCourseService.findStudentCourseList(studentNum, weekNum);
+	public List<StudentCourse> selectStuCourse(String studentNum) {
+		return classCourseService.findStudentCourseList(studentNum);
 	}
 	
 	// @Autowired

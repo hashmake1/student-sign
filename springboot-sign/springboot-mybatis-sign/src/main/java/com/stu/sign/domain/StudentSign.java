@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class StudentSign {
 	private int signId;
 	private int studentNum;
+	private int classCourseId;
 	// private String studentName;
 	private String studentclassNum;
 	private String weekNum;
@@ -28,13 +29,13 @@ public class StudentSign {
 		this.studentNum = studentNum;
 	}
 
-	// public String getStudentName() {
-	// return studentName;
-	// }
-	//
-	// public void setStudentName(String studentName) {
-	// this.studentName = studentName;
-	// }
+	public int getClassCourseId() {
+		return classCourseId;
+	}
+
+	public void setClassCourseId(int classCourseId) {
+		this.classCourseId = classCourseId;
+	}
 
 	public String getStudentclassNum() {
 		return studentclassNum;

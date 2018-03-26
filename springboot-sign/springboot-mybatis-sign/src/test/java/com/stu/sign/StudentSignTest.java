@@ -1,12 +1,20 @@
 package com.stu.sign;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.alibaba.fastjson.JSONObject;
 
 import junit.framework.TestCase;
 
@@ -14,38 +22,30 @@ import junit.framework.TestCase;
  * Unit test for simple App.
  */
 public class StudentSignTest extends TestCase {
-	// private static String doHttp(String xml) throws Exception {
-	// HttpClient client = new HttpClient();
-	// client.getHttpConnectionManager().getParams().setConnectionTimeout(0);
-	// client.getHttpConnectionManager().getParams().setSoTimeout(0);
-	// PostMethod method = new PostMethod(prop.getProperty("service"));
-	// method.addRequestHeader("Content-Type",
-	// "application/x-www-form-urlencoded; charset=UTF-8");
-	// method.addRequestHeader("Connection", "keep-alive");
-	// DefaultHttpMethodRetryHandler retry = new
-	// DefaultHttpMethodRetryHandler(0, false);
-	// RequestEntity objRequestEntity = new
-	// ByteArrayRequestEntity(xml.getBytes("UTF-8"));
-	// method.setRequestEntity(objRequestEntity);
-	// method.getParams().setParameter("http.method.retry-handler", retry);
-	// client.executeMethod(method);
-	// String rtn = method.getResponseBodyAsString();
-	// try {
-	// method.releaseConnection();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// return rtn;
-	// }
 
-	public String client(String url, HttpMethod method, MultiValueMap<String, String> params) {
-		RestTemplate client = new RestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		// 请勿轻易改变此提交方式，大部分的情况下，提交方式都是表单提交
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(params, headers);
-		// 执行HTTP请求
-		ResponseEntity<String> response = client.exchange(url, HttpMethod.POST, requestEntity, String.class);
-		return response.getBody();
+	public static void main(String[] args) throws Exception {
+		// HttpClient httpclient = new DefaultHttpClient();
+		// HttpPost httpPost = new
+		// HttpPost("http://127.0.0.1:8080/studentSign");
+		// List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		// nvps.add(new BasicNameValuePair("studentNum", "vip"));
+		// nvps.add(new BasicNameValuePair("weekNum", "secret"));
+		// httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+		// httpclient.execute(httpPost);
+		// httpclient.getConnectionManager().shutdown();
+		HttpClient httpclient = HttpClients.createDefault();
+		HttpPost post = new HttpPost("http://localhost:8080/studentSign");
+		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
+		nvps.add(new BasicNameValuePair("studentNum", "vip"));
+		nvps.add(new BasicNameValuePair("weekNum", "secret"));
+		post.setEntity(new UrlEncodedFormEntity(nvps));
+		// HttpEntity hh=new StringEntity(params,"UTF-8");
+		UrlEncodedFormEntity he = new UrlEncodedFormEntity(nvps, "UTF-8");
+		post.setEntity(he);
+		HttpResponse res = httpclient.execute(post);
+		HttpEntity entity = res.getEntity();
+		String msg = EntityUtils.toString(entity, "UTF-8");
+		System.out.println(msg);
 	}
+
 }

@@ -17,9 +17,7 @@
 function student_sign(){
 	$.ajax({  
         url: getIpUrl() + '/studentSign',  
-        data:{'studentNum':'141406101',
-        	  'weekNum':'周一'
-        },
+        data:{},
         dataType:'JSON',  
         type:'post',  
         success:function(data){
@@ -51,7 +49,7 @@ function doDownload(){
 			<ul class="app-list">
 				<li>
 					<div class="app-wrap">
-						<a href="javascript:goto('xunjia.html');"> <i class="iconfont">&#xe625;</i> <span>缺课人员</span>
+						<a href="javascript:goto('queke.html');"> <i class="iconfont">&#xe625;</i> <span>缺课人员</span>
 						</a>
 					</div>
 				</li>

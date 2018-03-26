@@ -3,27 +3,18 @@ package com.stu.sign.domain;
 import java.sql.Timestamp;
 
 public class StudentCourse {
-	private int id;
-	private String section;
+	private int classCourseId;
 	private String classNum;
 	private String weekNum;
 	private Timestamp courseEndTime;
 	private Timestamp courseStartTime;
 
-	public int getId() {
-		return id;
+	public int getClassCourseId() {
+		return classCourseId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getSection() {
-		return section;
-	}
-
-	public void setSection(String section) {
-		this.section = section;
+	public void setClassCourseId(int classCourseId) {
+		this.classCourseId = classCourseId;
 	}
 
 	public String getClassNum() {
@@ -57,5 +48,4 @@ public class StudentCourse {
 	public void setCourseStartTime(Timestamp courseStartTime) {
 		this.courseStartTime = courseStartTime;
 	}
-
 }

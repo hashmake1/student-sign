@@ -32,16 +32,11 @@ public class LoginPageController {
 	}
 
 	@PostMapping("/loginPost")
-	public @ResponseBody Map<String, Object> loginPost(String accountId, String password, String loginType, HttpSession session) {
+	public @ResponseBody Map<String, Object> loginPost(String account, String password, String loginType, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		// if (!"a".equals(password)) {
-		// map.put("success", false);
-		// map.put("message", "密码错误");
-		// return map;
-		// }
-		boolean isLoginSuccess = userLoginService.checkAccountAndPwd(accountId, password);
+		boolean isLoginSuccess = userLoginService.checkAccountAndPwd(account, password);
 		if (isLoginSuccess) {//如果成功,则保存到
-			session.setAttribute("ACCOUNT_ID", accountId);
+			session.setAttribute("ACCOUNT_ID", account);
 			session.setAttribute("LOGIN_TYPE", loginType);
 			map.put("success", true);
 			map.put("message", "登录成功");
