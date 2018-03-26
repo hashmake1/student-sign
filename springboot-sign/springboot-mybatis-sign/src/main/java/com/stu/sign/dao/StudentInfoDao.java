@@ -12,4 +12,7 @@ import com.stu.sign.domain.StudentInfo;
 public interface StudentInfoDao {
 	@Select("select * from student_info where classnum = #{classNum}")
 	List<StudentInfo> findListByName(@Param("classNum") String classNum);
+	
+	@Select("select * from student_info where studentNum = #{studentNum}  and LoginPassword = #{loginPassword}")
+	List<StudentInfo> findListByNumPwd(@Param("studentNum") String studentNum, @Param("loginPassword") String loginPassword);
 }

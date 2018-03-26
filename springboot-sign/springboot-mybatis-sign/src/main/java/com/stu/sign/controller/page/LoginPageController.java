@@ -34,7 +34,7 @@ public class LoginPageController {
 	@PostMapping("/loginPost")
 	public @ResponseBody Map<String, Object> loginPost(String account, String password, String loginType, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		boolean isLoginSuccess = userLoginService.checkAccountAndPwd(account, password);
+		boolean isLoginSuccess = userLoginService.checkAccountAndPwd(account, password, loginType);
 		if (isLoginSuccess) {//如果成功,则保存到
 			session.setAttribute("ACCOUNT_ID", account);
 			session.setAttribute("LOGIN_TYPE", loginType);
