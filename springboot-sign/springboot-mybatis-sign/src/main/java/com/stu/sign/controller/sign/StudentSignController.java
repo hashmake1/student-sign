@@ -36,22 +36,35 @@ public class StudentSignController {
 	@Autowired
 	private StudentSignService studentSignService;
 
+	/**
+	 * 学生本节课签到功能
+	 */
 	@PostMapping("/studentSign")
 	public @ResponseBody Map<String, Object> studentSign(String studentNum, String weekNum, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		if (!StringUtils.isEmpty(session.getAttribute("ACCOUNT_ID"))) {
 			studentNum = (String) session.getAttribute("ACCOUNT_ID");
 		}
+		if(EqualUtils.equals(session.getAttribute("LOGIN_TYPE"), 1)){
+			map.put("message", "老师无需签到考勤");
+			return map;
+		}
 		List<StudentCourse> studentCourseList = classCourseService.findStudentCourseList(studentNum);
-		Map<String, Object> map = new HashMap<String, Object>();
 		if (ListUtils.isEmpty(studentCourseList)) {
 			map.put("message", "当前无课程考勤");
 		} else {
+			int classCourseId = studentCourseList.get(0).getClassCourseId();
+			List<StudentSign> studentSignList = studentSignService.findStudentSignList(classCourseId, Integer.valueOf(studentNum));
+			if(!studentSignList.isEmpty()){
+				map.put("message", "该学号本节课已考勤成功,不能重复签到.");
+				return map;
+			}
 			String accountId = (String) session.getAttribute("ACCOUNT_ID");
 			StudentSign studentSign = new StudentSign();
 			studentSign.setStudentclassNum(studentCourseList.get(0).getClassNum());
 			studentSign.setClassCourseId(studentCourseList.get(0).getClassCourseId());
 			studentSign.setStudentNum(Integer.valueOf(accountId));
-			studentSign.setWeekNum(weekNum);
+			studentSign.setWeekNum("无");
 			studentSign.setSignTime(new Timestamp(System.currentTimeMillis()));
 			studentSign.setSignFlag(1);
 			studentSignService.insertStudentSign(studentSign);
@@ -60,6 +73,9 @@ public class StudentSignController {
 		return map;
 	}
 
+	/**
+	 * 学生签到功能
+	 */
 	@PostMapping("/findAbsentStudents")
 	public @ResponseBody Map<String, Object> findAbsentStudents(@RequestParam(value = "teacherNum", required = false) String teacherNum, HttpSession session) {
 		Map<String, Object> retMap = new HashMap<String, Object>();

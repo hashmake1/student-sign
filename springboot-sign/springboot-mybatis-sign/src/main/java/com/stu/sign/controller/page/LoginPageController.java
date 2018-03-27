@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.stu.sign.service.UserLoginService;
+import com.stu.sign.utils.EqualUtils;
 
 @Controller
 public class LoginPageController {
@@ -31,6 +32,9 @@ public class LoginPageController {
 		return "h5/login";
 	}
 
+	/**
+	 * 登陆功能
+	 */
 	@PostMapping("/loginPost")
 	public @ResponseBody Map<String, Object> loginPost(String account, String password, String loginType, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -42,15 +46,23 @@ public class LoginPageController {
 			map.put("message", "登录成功");
 		} else {
 			map.put("success", false);
-			map.put("message", "账号或密码错误");
+			if(EqualUtils.equals(loginType, 1)){
+				map.put("message", "教师工号或密码错误");
+			}else{
+				map.put("message", "学生学号或密码错误");
+			}
 		}
 		return map;
 	}
 
+	/**
+	 * 登出功能
+	 */
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		// 移除session
 		session.removeAttribute("ACCOUNT_ID");
+		session.removeAttribute("LOGIN_TYPE");
 		return "redirect:/login";
 	}
 }

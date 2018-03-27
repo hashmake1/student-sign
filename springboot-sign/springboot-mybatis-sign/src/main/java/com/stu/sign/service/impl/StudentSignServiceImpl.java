@@ -15,16 +15,21 @@ import com.stu.sign.service.StudentSignService;
 @Service
 public class StudentSignServiceImpl implements StudentSignService {
 
-    @Autowired
-    private StudentSignDao studentSignDao;
+	@Autowired
+	private StudentSignDao studentSignDao;
 
 	@Override
-	public int insertStudentSign(StudentSign studentSign){
+	public int insertStudentSign(StudentSign studentSign) {
 		return studentSignDao.insertStudentSign(studentSign);
 	}
 
 	@Override
 	public List<StudentSign> findStudentSignList(int classCourseId) {
 		return studentSignDao.findListByName(classCourseId);
+	}
+
+	@Override
+	public List<StudentSign> findStudentSignList(int classCourseId, int studentNum) {
+		return studentSignDao.findStudentSignList(classCourseId, studentNum);
 	}
 }

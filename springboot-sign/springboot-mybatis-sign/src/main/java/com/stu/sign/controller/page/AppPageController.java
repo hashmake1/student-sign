@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AppPageController {
 
+	/**
+	 * 页面跳转
+	 */
 	@RequestMapping("/redirectPage")
 	public String redirectAppPage(HttpServletRequest request) {
 		String pagename = request.getParameter("pagename");

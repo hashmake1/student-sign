@@ -8,4 +8,6 @@ public interface StudentSignService {
 	public int insertStudentSign(StudentSign studentSign);
 	
 	public List<StudentSign> findStudentSignList(int classCourseId);
+	
+	public List<StudentSign> findStudentSignList(int classCourseId, int studentNum);
 }
